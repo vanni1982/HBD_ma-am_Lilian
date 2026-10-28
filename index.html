@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Belated PeeBday ma'am Lilian 🎁🙂</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            max-width: 600px;
+            width: 90%;
+            position: relative;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 2.5rem;
+        }
+
+        /* Countdown Styles */
+        .countdown-box {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .time-segment {
+            background: #ff758c;
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            min-width: 80px;
+        }
+
+        .time-number {
+            font-size: 2rem;
+            font-weight: bold;
+            display: block;
+        }
+
+        .time-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            opacity: 0.8;
+        }
+
+        /* Video Area & Moving Text */
+        .video-wrapper {
+            position: relative;
+            max-width: 400px;
+            margin: 20px auto 0 auto;
+        }
+
+        video {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            display: block;
+        }
+
+        /* RUNNING TEXT (Ma'am Lilian) */
+        .marquee-container {
+            width: 100%;
+            overflow: hidden;
+            background: #ff758c;
+            color: white;
+            padding: 8px 0;
+            border-radius: 5px;
+            margin-top: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .marquee-text {
+            display: inline-block;
+            white-space: nowrap;
+            font-size: 1.3rem;
+            font-weight: bold;
+            padding-left: 100%;
+            animation: text-scroll 8s linear infinite;
+        }
+
+        @keyframes text-scroll {
+            0% { transform: translate3d(0, 0, 0); }
+            100% { transform: translate3d(-100%, 0, 0); }
+        }
+
+        /* SIGNATURE AREA IN THE BOTTOM RIGHT */
+        .signature-tag {
+            position: absolute;
+            bottom: 15px;
+            right: 25px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #555;
+        }
+
+        /* VANNI TEXT ONLY (Blinking 3x a second) */
+        #vanni-name {
+            display: inline-block;
+            margin-left: 5px;
+            animation: blink 0.333s infinite;
+        }
+
+        @keyframes blink {
+            0%, 49% { opacity: 1; }
+            50%, 100% { opacity: 0; }
+        }
+
+        /* Buttons styling */
+        .btn-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: center;
+            margin-top: 15px;
+            margin-bottom: 20px;
+        }
+
+        button {
+            background: #ff758c;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 1rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s;
+            width: 80%;
+            max-width: 300px;
+        }
+
+        button:hover {
+            background: #ff7e5f;
+        }
+
+        #unmute-btn {
+            background: #2ed573;
+            animation: pulse 1.5s infinite;
+        }
+
+        #unmute-btn:hover {
+            background: #26af5f;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* Celebration Animations */
+        .celebrate-title {
+            color: #ff4757;
+            font-size: 2.8rem;
+            animation: bounce 1s infinite alternate;
+        }
+
+        @keyframes bounce {
+            from { transform: translateY(0); }
+            to { transform: translateY(-10px); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- COUNTDOWN PAGE -->
+        <div id="countdown-page">
+            <h1>Birthday Countdown</h1>
+            <div class="countdown-box">
+                <div class="time-segment">
+                    <span class="time-number" id="days">00</span>
+                    <span class="time-label">Days</span>
+                </div>
+                <div class="time-segment">
+                    <span class="time-number" id="hours">00</span>
+                    <span class="time-label">Hours</span>
+                </div>
+                <div class="time-segment">
+                    <span class="time-number" id="minutes">00</span>
+                    <span class="time-label">Mins</span>
+                </div>
+                <div class="time-segment">
+                    <span class="time-number" id="seconds">00</span>
+                    <span class="time-label">Secs</span>
+                </div>
+            </div>
+            <p style="color: #666;">Waiting for the special day...</p>
+        </div>
+
+        <!-- GREETINGS PAGE -->
+        <div id="greetings-page" class="hidden">
+            <h1 class="celebrate-title">🎉 Belated Happy Birthday! 🎂</h1>
+            <p style="font-size: 1.2rem; color: #555; margin-bottom: 5px;">Wishing you all the best on your special day!</p>
+            
+            <div class="video-wrapper">
+                <video id="bg-video" autoplay muted loop playsinline>
+                    <source src="hbd_song.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+
+                <div class="marquee-container">
+                    <div class="marquee-text"> ✨ Belated Happy Birthday Ma'am Lilian! 🎉 Best Wishes to You! 🎂 ✨ </div>
+                </div>
+            </div>
+            
+            <div class="btn-group">
+                <button id="unmute-btn">🔊 PINDUTIN PARA MAY TUNOG</button>
+                <button id="pip-btn">Pop-out Video (Picture-in-Picture)</button>
+            </div>
+
+            <div class="signature-tag">From:<span id="vanni-name">Vanni</span></div>
+        </div>
+    </div>
+    <script>
+        // Set ang target sa 12:00 Noon (Tanghali) ngayong araw
+        const targetDate = new Date();
+        targetDate.setHours(12, 0, 0, 0); 
+        const targetTime = targetDate.getTime();
+
+        const countdownInterval = setInterval(function() {
+            const now = new Date().getTime();
+            const difference = targetTime - now;
+
+            const d = Math.floor(difference / (1000 * 60 * 60 * 24));
+            const h = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const m = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+            const s = Math.floor((difference % (1000 * 60)) / 1000);
+
+            // Kapag lumagpas na o eksaktong 12 noon na, puwersahang i-zero ang display
+            if (difference <= 0) {
+                document.getElementById("days").innerText = "00";
+                document.getElementById("hours").innerText = "00";
+                document.getElementById("minutes").innerText = "00";
+                document.getElementById("seconds").innerText = "00";
+            } else {
+                document.getElementById("days").innerText = String(d).padStart(2, '0');
+                document.getElementById("hours").innerText = String(h).padStart(2, '0');
+                document.getElementById("minutes").innerText = String(m).padStart(2, '0');
+                document.getElementById("seconds").innerText = String(s).padStart(2, '0');
+            }
+
+            // KAPAG NA-ZERO NA ANG TIMER
+            if (difference <= 0) {
+                clearInterval(countdownInterval);
+                
+                document.getElementById("countdown-page").classList.add("hidden");
+                document.getElementById("greetings-page").classList.remove("hidden");
+                
+                const video = document.getElementById("bg-video");
+                video.play();
+                
+                startVanniColorChange();
+            }
+        }, 1000);
+
+        // JAVASCRIPT PARA SA PAIBA-IBANG KULAY NI VANNI
+        function startVanniColorChange() {
+            const vanni = document.getElementById("vanni-name");
+            const rainbowColors = [
+                '#ff4757', '#ff6b81', '#ffa502', '#ff7f50', 
+                '#2ed573', '#1e90ff', '#3742fa', '#9b59b6'
+            ];
+            let colorIndex = 0;
+
+            setInterval(() => {
+                vanni.style.color = rainbowColors[colorIndex];
+                colorIndex = (colorIndex + 1) % rainbowColors.length;
+            }, 333);
+        }
+
+        // BUTTON CONTROLS
+        const pipBtn = document.getElementById("pip-btn");
+        const unmuteBtn = document.getElementById("unmute-btn");
+        const video = document.getElementById("bg-video");
+
+        unmuteBtn.onclick = function() {
+            video.muted = false;
+            unmuteBtn.style.display = "none";
+        };
+
+        if (!document.pictureInPictureEnabled) {
+            pipBtn.style.display = "none";
+        }
+
+        pipBtn.addEventListener("click", async () => {
+            try {
+                if (document.pictureInPictureElement) {
+                    await document.exitPictureInPicture();
+                } else {
+                    await video.requestPictureInPicture();
+                }
+            } catch (error) {
+                console.error("Failed to enter Picture-in-Picture mode:", error);
+            }
+        });
+    </script>
+</body>
+</html>
